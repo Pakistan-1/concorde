@@ -96,6 +96,11 @@
       <checkbox>
         <halign>left</halign>
         <label>IVSI 1 from 0 ft  ~</label>
+        <color>
+         <red>0.5</red>
+         <green>0.5</green>
+         <blue>0.5</blue>
+        </color>
         <property>/controls/adc/system[0]/ivsi-emulated</property>
         <binding>
          <command>property-toggle</command>
@@ -106,6 +111,11 @@
       <checkbox>
         <halign>left</halign>
         <label>IVSI 2 from 0 ft  ~</label>
+        <color>
+         <red>0.5</red>
+         <green>0.5</green>
+         <blue>0.5</blue>
+        </color>
         <property>/controls/adc/system[1]/ivsi-emulated</property>
         <binding>
          <command>property-toggle</command>
@@ -130,6 +140,11 @@
       <checkbox>
         <halign>left</halign>
         <label>Log instrument toggles</label>
+        <color>
+         <red>0.5</red>
+         <green>0.5</green>
+         <blue>0.5</blue>
+        </color>
         <property>/controls/adc/ivsi-log</property>
         <binding>
          <command>property-toggle</command>
@@ -149,21 +164,21 @@
    <layout>hbox</layout>
 
    <button>
-    <legend>Close</legend>
-    <default>true</default>
-    <key>Esc</key>
+    <legend>Back</legend>
+    <key>b</key>
+    <binding>
+     <command>dialog-show</command>
+     <dialog-name>Concorde-menu</dialog-name>
+    </binding>
     <binding>
       <command>dialog-close</command>
     </binding>
    </button>
 
    <button>
-    <legend>Menu</legend>
-    <key>m</key>
-    <binding>
-     <command>dialog-show</command>
-     <dialog-name>Concorde-menu</dialog-name>
-    </binding>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
     <binding>
       <command>dialog-close</command>
     </binding>

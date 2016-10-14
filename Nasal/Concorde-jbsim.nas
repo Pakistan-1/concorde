@@ -8,6 +8,33 @@
 
 
 
+# =================
+# OVERRIDING JSBSIM
+# =================
+
+ConcordeJSBsim = {};
+
+ConcordeJSBsim.new = func {
+   var obj = { parents : [ConcordeJSBsim,System]
+         };
+
+   obj.init();
+
+   return obj;
+}
+
+ConcordeJSBsim.init = func {
+   me.inherit_system("/systems/flight");
+}
+
+ConcordeJSBsim.specific = func {
+   # disable JSBSim stand alone mode
+   for( var i=0; i < constantaero.NBENGINES; i=i+1 ) {
+        me.itself["tank"][i].getChild("priority").setValue( 0 );
+   }
+}
+
+
 # ==============
 # INITIALIZATION
 # ==============
@@ -53,7 +80,7 @@ ConcordeMain.putinrelation = func {
 
    copilotcrew.set_relation( airbleedsystem, autopilotsystem, electricalsystem, flightsystem,
                              hydraulicsystem, lightingsystem, MWSsystem, voicecrew );
-   engineercrew.set_relation( airbleedsystem, autopilotsystem, electricalsystem, enginesystem,
+   engineer.set_relation( airbleedsystem, autopilotsystem, electricalsystem, enginesystem,
                               fuelsystem, hydraulicsystem, lightingsystem, voicecrew );
    voicecrew.set_relation( autopilotsystem );
 
@@ -73,7 +100,7 @@ ConcordeMain.startupcron = func {
    if( getprop( "/controls/crew/startup" ) ) {
        copilotcrew.toggleexport();
        copilothuman.wakeupexport();
-       engineercrew.toggleexport();
+       engineer.toggleexport();
        engineerhuman.wakeupexport();
        crewscreen.toggleexport();
        voicecrew.toggleexport();
@@ -165,7 +192,7 @@ ConcordeMain.sec60cron = func {
    airbleedsystem.slowschedule();
    antiicingsystem.slowschedule();
 #   copilotcrew.slowschedule();
-#   engineercrew.veryslowschedule();
+#   engineer.veryslowschedule();
 
    # schedule the next call
    settimer(func { me.sec60cron(); },60);
@@ -193,10 +220,23 @@ ConcordeMain.savedata = func {
                        "/controls/crew/presets",
                        "/controls/crew/radio",
                        "/controls/crew/startup",
+                       "/controls/crew/stop-engine23",
                        "/controls/crew/timeout",
                        "/controls/crew/timeout-s",
+                       "/controls/environment/als/lights",
                        "/controls/environment/rain",
                        "/controls/environment/smoke",
+                       "/controls/human/destination/category/diversion",
+                       "/controls/human/destination/category/everything",
+                       "/controls/human/destination/category/historical",
+                       "/controls/human/destination/category/other",
+                       "/controls/human/destination/category/regular",
+                       "/controls/human/destination/filter/navaid",
+                       "/controls/human/destination/filter/range",
+                       "/controls/human/destination/show",
+                       "/controls/human/destination/sort/distance",
+                       "/controls/human/destination/sort/ident",
+                       "/controls/human/destination/sort/name",
                        "/controls/fuel/reinit",
                        "/controls/tractor/distance-m",
                        "/controls/seat/recover",
@@ -231,6 +271,7 @@ ConcordeMain.instantiate = func {
    globals.Concorde.constant = Concorde.Constant.new();
    globals.Concorde.constantaero = Concorde.Constantaero.new();
    globals.Concorde.constantISA = Concorde.ConstantISA.new();
+   globals.Concorde.FDM = Concorde.ConcordeJSBsim.new();
 
    globals.Concorde.electricalsystem = Concorde.Electrical.new();
    globals.Concorde.hydraulicsystem = Concorde.Hydraulic.new();
@@ -275,7 +316,7 @@ ConcordeMain.instantiate = func {
    globals.Concorde.crewscreen = Crewbox.new();
 
    globals.Concorde.copilotcrew = Concorde.Virtualcopilot.new();
-   globals.Concorde.engineercrew = Concorde.Virtualengineer.new();
+   globals.Concorde.engineer = Concorde.Virtualengineer.new();
    globals.Concorde.voicecrew = Concorde.Voice.new();
 
    globals.Concorde.copilothuman = Concorde.Copilothuman.new();
@@ -293,6 +334,9 @@ ConcordeMain.init = func {
    me.instantiate();
    me.putinrelation();
    me.synchronize();
+
+   # JSBSim specific
+   globals.Concorde.FDM.specific();
 
    # schedule the 1st call
    settimer(func { me.sec1cron(); },0);

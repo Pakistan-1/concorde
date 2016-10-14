@@ -10,7 +10,7 @@
 <PropertyList>
   <name>Concorde-navigation</name>
   <layout>vbox</layout>
-  <width>450</width>
+  <width>750</width>
 
   <text>
     <label>Concorde navigation</label>
@@ -19,6 +19,174 @@
   <hrule><dummy/></hrule>
 
   <group>
+   <layout>hbox</layout>
+
+   <group>
+    <layout>vbox</layout>
+    <halign>center</halign>
+
+    <text>
+      <label>Radio management</label>
+    </text>
+
+    <text>
+     <label>(navaids in Nasal/Concorde-route.xml)</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
+    </text>
+
+    <text>
+      <label>virtual crew overrides (within 200 NM, beyond FL100),</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
+    </text>
+
+    <text>
+     <label>once nearest airport has changed</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
+    </text>
+
+    <text>
+      <label></label>
+    </text>
+
+    <text>
+      <label></label>
+    </text>
+
+    <group>
+     <layout>hbox</layout>
+
+     <button>
+      <legend>Arrival</legend>
+      <key>a</key>
+      <binding>
+       <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>globals.Concorde.engineercrew.radioexport(1);</script>
+      </binding>
+     </button>
+
+     <button>
+      <legend>Departure</legend>
+      <key>d</key>
+      <binding>
+       <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>globals.Concorde.engineercrew.radioexport(0);</script>
+      </binding>
+     </button>
+    </group>
+
+    <group>
+     <layout>hbox</layout>
+
+     <text>
+      <halign>left</halign>
+      <property>/systems/human/airport-id</property>
+      <live>true</live>
+      <color>
+       <red>0.2</red>
+       <green>0.8</green>
+       <blue>0.2</blue>
+      </color>
+     </text>
+
+     <text>
+      <property>/systems/human/airport-phase</property>
+      <halign>left</halign>
+      <live>true</live>
+      <color>
+       <red>0.2</red>
+       <green>0.8</green>
+       <blue>0.2</blue>
+      </color>
+     </text>
+    </group>
+
+    <group>
+     <layout>hbox</layout>
+
+     <text>
+      <halign>left</halign>
+      <property>/systems/human/radio-id</property>
+      <live>true</live>
+      <color>
+       <red>0.2</red>
+       <green>0.8</green>
+       <blue>0.2</blue>
+      </color>
+     </text>
+
+     <text>
+      <property>/systems/human/radio-phase</property>
+      <halign>left</halign>
+      <live>true</live>
+      <color>
+       <red>0.2</red>
+       <green>0.8</green>
+       <blue>0.2</blue>
+      </color>
+     </text>
+    </group>
+
+    <text>
+      <label></label>
+    </text>
+
+    <group>
+     <layout>hbox</layout>
+     
+     <input>
+      <halign>left</halign>
+      <property>/controls/human/airport-id</property>
+      <label>at airport</label>
+     </input>
+
+     <button>
+      <legend>Search</legend>
+      <key>s</key>
+      <binding>
+       <command>dialog-show</command>
+       <dialog-name>Concorde-navigation2</dialog-name>
+      </binding>
+      <binding>
+       <command>dialog-close</command>
+      </binding>
+     </button>
+    </group>
+
+    <text>
+     <label>nearest airport in range, if none</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
+    </text>
+
+    <text>
+      <label></label>
+    </text>
+   </group>
+   
+   <vrule/>
+
+   <group>
     <layout>vbox</layout>
     <halign>center</halign>
 
@@ -100,18 +268,18 @@
        </color>
       </text>
     </group>
-  </group>
 
-  <text>
-    <label></label>
-  </text>
-
-  <group>
-    <layout>vbox</layout>
-    <halign>center</halign>
+    <text>
+     <label></label>
+    </text>
 
     <text>
      <label>Fuel consumption (kg/h)</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
     </text>
 
     <text>
@@ -123,15 +291,10 @@
       <blue>0.2</blue>
      </color>
     </text>
-  </group>
 
-  <text>
-    <label></label>
-  </text>
-
-  <group>
-    <layout>vbox</layout>
-    <halign>center</halign>
+    <text>
+     <label></label>
+    </text>
 
     <text>
      <label>Rate (ft/minute) to reach</label>
@@ -229,14 +392,24 @@
     </text>
 
     <text>
-      <label></label>
+     <label></label>
+    </text>
+
+    <text>
+     <label>last waypoint at</label>
+     <color>
+      <red>0.5</red>
+      <green>0.5</green>
+      <blue>0.5</blue>
+     </color>
     </text>
 
     <input>
      <halign>left</halign>
      <property>/controls/engineer/destination-ft</property>
-     <label>ft at last waypoint</label>
+     <label>ft</label>
     </input>
+   </group>
   </group>
 
   <text>
@@ -247,11 +420,14 @@
    <layout>hbox</layout>
 
    <button>
-    <legend>Close</legend>
-    <default>true</default>
-    <key>Esc</key>
+    <legend>Back</legend>
+    <key>b</key>
     <binding>
      <command>dialog-apply</command>
+    </binding>
+    <binding>
+     <command>dialog-show</command>
+     <dialog-name>Concorde-menu</dialog-name>
     </binding>
     <binding>
       <command>dialog-close</command>
@@ -259,12 +435,9 @@
    </button>
 
    <button>
-    <legend>Menu</legend>
-    <key>m</key>
-    <binding>
-     <command>dialog-show</command>
-     <dialog-name>Concorde-menu</dialog-name>
-    </binding>
+    <legend>Close</legend>
+    <default>true</default>
+    <key>Esc</key>
     <binding>
      <command>dialog-apply</command>
     </binding>

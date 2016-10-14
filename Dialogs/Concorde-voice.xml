@@ -45,6 +45,7 @@
      <text>
       <live>true</live>
       <property>/systems/voice/callout</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -67,6 +68,7 @@
      <text>
       <live>true</live>
       <property>/systems/voice/display/captain</property>
+      <halign>left</halign>
       <color>
        <red>0.8</red>
        <green>0.8</green>
@@ -85,6 +87,7 @@
      <text>
       <live>true</live>
       <property>/systems/voice/display/copilot</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -103,6 +106,7 @@
      <text>
       <live>true</live>
       <property>/systems/voice/display/engineer</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -232,7 +236,11 @@
       </text>
 
       <text>
-        <label>Full throttle (aborted landing)</label>
+        <label>Full throttle</label>
+      </text>
+
+      <text>
+        <label>(aborted landing)</label>
       </text>
 
       <text>
@@ -343,6 +351,10 @@
       </text>
 
       <text>
+        <label>(optional)</label>
+      </text>
+
+      <text>
         <label>|</label>
       </text>
 
@@ -414,6 +426,18 @@
    <layout>hbox</layout>
 
    <button>
+    <legend>Back</legend>
+    <key>b</key>
+    <binding>
+     <command>dialog-show</command>
+     <dialog-name>Concorde-menu</dialog-name>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+   </button>
+
+   <button>
     <legend>Close</legend>
     <default>true</default>
     <key>Esc</key>
@@ -429,17 +453,8 @@
      <command>dialog-show</command>
      <dialog-name>Concorde-voice2</dialog-name>
     </binding>
-   </button>
-
-   <button>
-    <legend>Menu</legend>
-    <key>m</key>
     <binding>
-     <command>dialog-show</command>
-     <dialog-name>Concorde-menu</dialog-name>
-    </binding>
-    <binding>
-      <command>dialog-close</command>
+     <command>dialog-close</command>
     </binding>
    </button>
   </group>

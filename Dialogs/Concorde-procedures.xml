@@ -35,28 +35,13 @@
      <layout>hbox</layout>
 
      <text>
-       <label>vor adf :</label>
-     </text>
-
-     <text>
-      <property>/systems/human/airport-id</property>
-     </text>
-    </group>
-
-    <text>
-      <label></label>
-    </text>
-
-    <group>
-     <layout>hbox</layout>
-
-     <text>
        <label>processing :</label>
      </text>
 
      <text>
       <live>true</live>
       <property>/systems/voice/display/processing</property>
+      <halign>left</halign>
       <color>
        <red>0.8</red>
        <green>0.2</green>
@@ -75,6 +60,7 @@
      <text>
       <live>true</live>
       <property>/systems/voice/display/completed</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -97,6 +83,7 @@
      <text>
       <live>true</live>
       <property>/systems/copilot/state-last</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -115,6 +102,7 @@
      <text>
       <live>true</live>
       <property>/systems/engineer/state-last</property>
+      <halign>left</halign>
       <color>
        <red>0.2</red>
        <green>0.8</green>
@@ -373,6 +361,18 @@
    <layout>hbox</layout>
 
    <button>
+    <legend>Back</legend>
+    <key>b</key>
+    <binding>
+     <command>dialog-show</command>
+     <dialog-name>Concorde-menu</dialog-name>
+    </binding>
+    <binding>
+      <command>dialog-close</command>
+    </binding>
+   </button>
+
+   <button>
     <legend>Close</legend>
     <default>true</default>
     <key>Esc</key>
@@ -388,6 +388,9 @@
      <command>dialog-show</command>
      <dialog-name>Concorde-procedures4</dialog-name>
     </binding>
+    <binding>
+     <command>dialog-close</command>
+    </binding>
    </button>
 
    <button>
@@ -396,18 +399,6 @@
     <binding>
      <command>dialog-show</command>
      <dialog-name>Concorde-procedures2</dialog-name>
-    </binding>
-    <binding>
-      <command>dialog-close</command>
-    </binding>
-   </button>
-
-   <button>
-    <legend>Menu</legend>
-    <key>m</key>
-    <binding>
-     <command>dialog-show</command>
-     <dialog-name>Concorde-menu</dialog-name>
     </binding>
     <binding>
       <command>dialog-close</command>
